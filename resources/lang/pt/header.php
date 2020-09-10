@@ -5,5 +5,8 @@ return [
     'home' => 'Inicio',
     'login' => 'Logar',
     'register' => 'Registrar',
-    'logout' => 'Sair'
+    'logout' => 'Sair',
+    'people' => 'Pessoas',
+    'hotels' => 'Hoteis',
+    'rooms' => 'Quartos'
 ];
