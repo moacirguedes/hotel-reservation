@@ -10,6 +10,8 @@
 
 # hotel-reservation
 
+![Db structure](diagrama.jpg)
+
 ## Instalation
 
 First clone this repository
