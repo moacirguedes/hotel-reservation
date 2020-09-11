@@ -33,6 +33,7 @@ After that, set up the database
 ```
 rename env.example to .env
 fill in your local database information
+$ composer dump-autoload
 $ php artisan migrate:fresh --seed
 ```
 
