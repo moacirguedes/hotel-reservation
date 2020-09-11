@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Room;
 
 class Hotel extends Model
 {
@@ -12,4 +13,9 @@ class Hotel extends Model
     protected $fillable = [
         'name', 'address', 'stars'
     ];
+
+    function room()
+    {
+        return $this->hasMany(Room::class);
+    }
 }
