@@ -9,7 +9,7 @@
                     <div class="card">
                         <div class="card-header flex justifysb">
                             <div>{{ __('header.people') }}</div>
-                            <div>Novo</div>
+                            <a href="{{ url('/users/create') }}" class="btn-xs btn-info btn">{{ __('user.new') }}</a>
                         </div>
 
                         <div class="card-body">
@@ -19,8 +19,8 @@
                                         <th>{{ __('user.name') }}</th>
                                         <th>{{ __('user.email') }}</th>
                                         <th>{{ __('user.type') }}</th>
-                                        <th>Editar</th>
-                                        <th>Deletar</th>
+                                        <th>{{ __('user.edit') }}</th>
+                                        <th>{{ __('user.delete') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -29,8 +29,25 @@
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ trans_choice('user.isManager', $user->isManager) }}</td>
-                                        <td><a href="">Editar</a></td>
-                                        <td><a href="">Deletar</a></td>
+                                        <td>
+                                            <a 
+                                                href="{{ url('/users/' . $user->id . '/edit') }}"
+                                                class="btn-xs btn-info btn">
+                                                {{ __('user.edit') }}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <form method="POST" action="{{ route('users.destroy', $user->id) }}">
+                                                {!! csrf_field() !!} {{ method_field('DELETE') }}
+                                                <button 
+                                                    type="submit"
+                                                    class="btn-xs btn-info btn"
+                                                    {{ $user->id == auth()->user()->id ? 'disabled' : '' }}
+                                                >
+                                                    {{ __('user.delete') }}     
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
                                     <?php endforeach; ?>
                                 </tbody>

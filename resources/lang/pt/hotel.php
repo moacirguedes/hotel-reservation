@@ -9,5 +9,5 @@ return [
     'rooms' => 'Quartos',
     'edit' => 'Editar',
     'delete' => 'Deletar',
-    'update' => 'Atualizar'
+    'update' => 'Atualizar Hotel'
 ];
