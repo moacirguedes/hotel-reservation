@@ -7,14 +7,14 @@ use Illuminate\Http\Request;
 
 class HotelController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware(function ($request, $next) {
+            if (!auth()->user()->isManager)
+                return view('home');
+
+            return $next($request);
+        });
     }
 
     /**
@@ -24,7 +24,7 @@ class HotelController extends Controller
      */
     public function create()
     {
-        //
+        return view('hotels.create');
     }
 
     /**
@@ -35,18 +35,8 @@ class HotelController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Hotel  $hotel
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Hotel $hotel)
-    {
-        //
+        Hotel::create($request->all());
+        return redirect('home');
     }
 
     /**
@@ -57,7 +47,7 @@ class HotelController extends Controller
      */
     public function edit(Hotel $hotel)
     {
-        //
+        return view('hotels.update', ['hotel' => $hotel]);
     }
 
     /**
@@ -69,7 +59,9 @@ class HotelController extends Controller
      */
     public function update(Request $request, Hotel $hotel)
     {
-        //
+        $hotel = Hotel::find($hotel->id);
+        $hotel->fill($request->all())->save();
+        return redirect('home');
     }
 
     /**
@@ -80,6 +72,7 @@ class HotelController extends Controller
      */
     public function destroy(Hotel $hotel)
     {
-        //
+        $hotel->destroy($hotel->id);
+        return redirect('home');
     }
 }
