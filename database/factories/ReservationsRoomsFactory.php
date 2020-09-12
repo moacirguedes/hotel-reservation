@@ -2,19 +2,20 @@
 
 namespace Database\Factories;
 
+use App\Models\Reservation;
+use App\Models\ReservationsRooms;
 use App\Models\Room;
-use App\Models\Hotel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class RoomFactory extends Factory
+class ReservationsRoomsFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Room::class;
+    protected $model = ReservationsRooms::class;
 
     /**
      * Define the model's default state.
@@ -24,9 +25,8 @@ class RoomFactory extends Factory
     public function definition()
     {
         return [
-            'price' => $this->faker->randomNumber(3),
-            'beds' => $this->faker->numberBetween(1, 3),
-            'hotel_id' => Hotel::factory()
+            'room_id' => Room::factory(),
+            'reservation_id' => Reservation::factory(),
         ];
     }
 }

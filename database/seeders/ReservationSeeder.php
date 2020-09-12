@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Reservation;
 use Illuminate\Database\Seeder;
-use App\Models\User;
 
-class UserSeeder extends Seeder
+class ReservationSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(5)->create();
+        Reservation::factory(10)->create();
     }
 }
