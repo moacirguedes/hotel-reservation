@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\ReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,14 @@ use App\Http\Controllers\RoomController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('set-locale/{locale}', function ($locale) {
+    if (in_array($locale, \Config::get('app.locales'))) {
+        session(['locale' => $locale]);
+    }
+    return redirect()->back();
+})->name('locale.setting');
+
 
 Route::group(['middleware' => ['guest']], function () {
     Route::get('/', function () {
@@ -30,5 +39,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('hotels', HotelController::class)->except(['index', 'show']);
     Route::resource('users', UserController::class)->except(['index', 'show']);
     Route::resource('hotels/{hotel}/rooms', RoomController::class)->except(['show']);
+    Route::resource('reservations', ReservationController::class)->except(['show', 'index', 'destroy', 'update', 'edit']);
 });
-
