@@ -45,7 +45,12 @@ and now you can run the application with
 $ php artisan serve
 ```
 
-it should be running on ```localhost:8080```
+it should be running on ```localhost:8080```, you can create a new user or login with a manager profile. Each one can do different things (The manager can create hotels and others things).
+
+```
+email: user@manager.com
+password: password
+```
 
 ____________________________
 

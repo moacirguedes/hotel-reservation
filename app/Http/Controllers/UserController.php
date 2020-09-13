@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -33,6 +34,8 @@ class UserController extends Controller
             'isManager' => $request['ismanager'] == "1" ? true : false
         ]);
 
+        Log::info('User: ' . auth()->user()->name . 'created a user:' . request()->getContent());
+
         return redirect('home');
     }
 
@@ -46,6 +49,8 @@ class UserController extends Controller
         $user = User::find($user->id);
         $user->isManager = $request->ismanager ? true : false;
         $user->save();
+
+        Log::info('User: ' . auth()->user()->name . 'updated a user:' . request()->getContent());
         return redirect('home');
     }
 

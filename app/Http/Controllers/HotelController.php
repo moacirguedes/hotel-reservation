@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Hotel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class HotelController extends Controller
 {
@@ -36,6 +37,7 @@ class HotelController extends Controller
     public function store(Request $request)
     {
         Hotel::create($request->all());
+        Log::info('User: ' . auth()->user()->name . 'created hotel:' . request()->getContent());
         return redirect('home');
     }
 
@@ -61,6 +63,7 @@ class HotelController extends Controller
     {
         $hotel = Hotel::find($hotel->id);
         $hotel->fill($request->all())->save();
+        Log::info('User: ' . auth()->user()->name . 'updated hotel:' . request()->getContent());
         return redirect('home');
     }
 
@@ -73,6 +76,7 @@ class HotelController extends Controller
     public function destroy(Hotel $hotel)
     {
         $hotel->destroy($hotel->id);
+        Log::info('User: ' . auth()->user()->name . 'deleted hotel:' . request()->getContent());
         return redirect('home');
     }
 }

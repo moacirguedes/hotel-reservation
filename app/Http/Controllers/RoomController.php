@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Room;
 use App\Models\Hotel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class RoomController extends Controller
 {
@@ -35,6 +36,8 @@ class RoomController extends Controller
         $room->hotel_id = $hotel->id;
         $room->save();
 
+        Log::info('User: ' . auth()->user()->name . 'created a room:' . request()->getContent());
+
         return redirect()->route('rooms.index', ['hotel' => $hotel->id]);
     }
 
@@ -53,6 +56,8 @@ class RoomController extends Controller
 
         $room = Room::find($room->id);
         $room->fill($request->all())->save();
+
+        Log::info('User: ' . auth()->user()->name . 'updated a room:' . request()->getContent());
         return redirect()->route('rooms.index', ['hotel' => $hotel->id]);
     }
 
@@ -62,6 +67,8 @@ class RoomController extends Controller
             die();
 
         $room->destroy($room->id);
+
+        Log::info('User: ' . auth()->user()->name . 'deleted a room:' . request()->getContent());
         return redirect()->route('rooms.index', ['hotel' => $hotel->id]);
     }
 }

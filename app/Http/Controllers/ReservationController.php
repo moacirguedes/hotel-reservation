@@ -6,6 +6,7 @@ use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Models\Hotel;
 use App\Models\Room;
+use Illuminate\Support\Facades\Log;
 
 class ReservationController extends Controller
 {
@@ -41,6 +42,8 @@ class ReservationController extends Controller
         
         $reservation->total_price = $total_price;
         $reservation->save();
+
+        Log::info('User: ' . auth()->user()->name . 'created a reservation:' . request()->getContent());
         
         return redirect('home');
     }
