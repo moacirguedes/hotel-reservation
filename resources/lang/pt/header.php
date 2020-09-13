@@ -8,5 +8,9 @@ return [
     'logout' => 'Sair',
     'people' => 'Pessoas',
     'hotels' => 'Hoteis',
-    'rooms' => 'Quartos'
+    'rooms' => 'Quartos',
+    'language' => 'Idioma',
+    'english' => 'Inglês',
+    'portuguese' => 'Português',
+    'reservation' => 'Reservar'
 ];

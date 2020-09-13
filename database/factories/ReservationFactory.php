@@ -2,18 +2,19 @@
 
 namespace Database\Factories;
 
+use App\Models\Reservation;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class UserFactory extends Factory
+class ReservationFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = User::class;
+    protected $model = Reservation::class;
 
     /**
      * Define the model's default state.
@@ -23,11 +24,10 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
-            'email' => $this->faker->unique()->safeEmail,
-            'password' => bcrypt('123456'),
-            'isManager' => false,
-            'remember_token' => Str::random(10),
+            'check_in' => $this->faker->dateTimeBetween('today', '+1 day'),
+            'check_out' => $this->faker->dateTimeBetween('next week', 'next month'),
+            'total_price' => $this->faker->randomFloat(2, 50, 500),
+            'user_id' => User::factory(),
         ];
     }
 }

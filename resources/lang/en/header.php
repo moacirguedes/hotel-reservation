@@ -2,8 +2,15 @@
 
 return [
     'title' => 'Hotel Reservation',
-    'home' => 'Home',
+    'home' => 'Start',
     'login' => 'Login',
     'register' => 'Register',
-    'logout' => 'Logout'
+    'logout' => 'Logout',
+    'people' => 'People',
+    'hotels' => 'Hotels',
+    'rooms' => 'Rooms',
+    'language' => 'Language',
+    'english' => 'English',
+    'portuguese' => 'Portuguese',
+    'reservation' => 'Reservation'
 ];
