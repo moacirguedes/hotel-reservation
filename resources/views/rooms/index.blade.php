@@ -7,6 +7,12 @@
                 <div class="card">
                     <div class="card-header flex justifysb">
                         <div>{{ __('room.name') }}</div>
+
+                        <a class="btn-xs btn-info btn" href="{{ route('reservations.create', $hotel->id) }}">{{ __('header.reservation') }}</a> 
+
+                        <a class="btn-xs btn-info btn" href="{{ route('reservations.index', $hotel->id) }}">{{ __('reservation.viewReservation') }}</a> 
+
+
                         @if (auth()->user()->isManager)
                         <a href="{{ url('hotels/' . $hotel->id . '/rooms/create') }}" class="btn-xs btn-info btn">{{ __('room.new') }}</a>
                         @endif

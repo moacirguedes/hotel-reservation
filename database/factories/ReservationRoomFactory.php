@@ -3,19 +3,19 @@
 namespace Database\Factories;
 
 use App\Models\Reservation;
-use App\Models\ReservationsRooms;
+use App\Models\ReservationRoom;
 use App\Models\Room;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class ReservationsRoomsFactory extends Factory
+class ReservationRoomFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = ReservationsRooms::class;
+    protected $model = ReservationRoom::class;
 
     /**
      * Define the model's default state.

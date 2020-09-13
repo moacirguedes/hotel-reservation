@@ -18,7 +18,7 @@ class CreateReservationsTable extends Migration
             $table->timestamps();
             $table->timestamp('check_in')->nullable();
             $table->timestamp('check_out')->nullable();
-            $table->decimal('total_price', 10, 2);
+            $table->decimal('total_price', 10, 2)->default(0);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

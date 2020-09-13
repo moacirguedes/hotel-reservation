@@ -11,5 +11,6 @@ return [
     'rooms' => 'Quartos',
     'language' => 'Idioma',
     'english' => 'Inglês',
-    'portuguese' => 'Português'
+    'portuguese' => 'Português',
+    'reservation' => 'Reservar'
 ];

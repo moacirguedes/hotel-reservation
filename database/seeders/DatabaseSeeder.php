@@ -19,14 +19,20 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             HotelSeeder::class,
-            RoomSeeder::class,
-            ReservationSeeder::class,
-            ReservationsRoomsSeeder::class
+            RoomSeeder::class
         ]);
 
         DB::table('users')->insert([
             'name' => 'Manager',
             'email' => 'user@manager.com',
+            'password' => Hash::make('password'),
+            'isManager' => true,
+            'remember_token' => Str::random(10),
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'Client',
+            'email' => 'user@client.com',
             'password' => Hash::make('password'),
             'isManager' => true,
             'remember_token' => Str::random(10),

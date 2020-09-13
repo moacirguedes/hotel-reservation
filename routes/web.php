@@ -39,5 +39,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('hotels', HotelController::class)->except(['index', 'show']);
     Route::resource('users', UserController::class)->except(['index', 'show']);
     Route::resource('hotels/{hotel}/rooms', RoomController::class)->except(['show']);
-    Route::resource('reservations', ReservationController::class)->except(['show', 'index', 'destroy', 'update', 'edit']);
+    Route::resource('{hotel}/reservations', ReservationController::class)->except(['show', 'destroy', 'update', 'edit']);
 });

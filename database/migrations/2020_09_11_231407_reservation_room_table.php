@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ReservationsRoomsTable extends Migration
+class ReservationRoomTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class ReservationsRoomsTable extends Migration
      */
     public function up()
     {
-        Schema::create('reservations_rooms', function (Blueprint $table) {
+        Schema::create('reservation_room', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('room_id');
@@ -30,6 +30,6 @@ class ReservationsRoomsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reservations_rooms');
+        Schema::dropIfExists('reservation_room');
     }
 }
