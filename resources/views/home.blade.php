@@ -86,7 +86,14 @@
                                     <td>{{ $hotel->name }}</td>
                                     <td>{{ $hotel->address }}</td>
                                     <td style="text-align: center">{{ $hotel->stars }}</td>
-                                    <td><a href="" class="btn-xs btn-info btn">Quartos</a></td>
+                                    <td>
+                                        <a 
+                                            href="{{ url('/hotels/' . $hotel->id . '/rooms') }}" 
+                                            class="btn-xs btn-info btn"
+                                        >
+                                            {{ __('hotel.rooms') }}
+                                        </a>
+                                    </td>
                                     @if ($user->isManager)
                                         <td>
                                             <a href="{{ url('/hotels/' . $hotel->id . '/edit') }}"

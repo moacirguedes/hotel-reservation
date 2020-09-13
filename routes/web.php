@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RoomController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,5 +29,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::resource('hotels', HotelController::class)->except(['index', 'show']);
     Route::resource('users', UserController::class)->except(['index', 'show']);
+    Route::resource('hotels/{hotel}/rooms', RoomController::class)->except(['show']);
 });
 

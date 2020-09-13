@@ -3,83 +3,65 @@
 namespace App\Http\Controllers;
 
 use App\Models\Room;
+use App\Models\Hotel;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index() 
     {
-        //
+        $hotel = Hotel::with('rooms')->get()->find(request()->route('hotel'));
+        $rooms = $hotel->rooms;
+    
+        return view('rooms.index', [
+            'rooms' => $rooms,
+            'hotel' => $hotel
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $hotel = Hotel::find(request()->route('hotel'));
+        return view('rooms.create', ['hotel' => $hotel]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(Request $request, Hotel $hotel)
     {
-        //
+        if (!auth()->user()->isManager)
+            die();
+
+        $room = new Room();
+        $room->fill($request->all());
+        $room->hotel_id = $hotel->id;
+        $room->save();
+
+        return redirect()->route('rooms.index', ['hotel' => $hotel->id]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Room  $room
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Room $room)
+    public function edit(Hotel $hotel, Room $room)
     {
-        //
+        return view('rooms.update', [
+            'room' => $room,
+            'hotel' => $hotel
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Room  $room
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Room $room)
+    public function update(Request $request, Hotel $hotel, Room $room)
     {
-        //
+        if (!auth()->user()->isManager)
+            die();
+
+        $room = Room::find($room->id);
+        $room->fill($request->all())->save();
+        return redirect()->route('rooms.index', ['hotel' => $hotel->id]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Room  $room
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Room $room)
+    public function destroy(Hotel $hotel, Room $room)
     {
-        //
-    }
+        if (!auth()->user()->isManager)
+            die();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Room  $room
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Room $room)
-    {
-        //
+        $room->destroy($room->id);
+        return redirect()->route('rooms.index', ['hotel' => $hotel->id]);
     }
 }
